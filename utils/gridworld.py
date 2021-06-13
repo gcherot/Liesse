@@ -59,6 +59,9 @@ class GridWorldWithPits(FiniteEnv):
                     if self.grid[r][c] == 'g':
                         self.P[s, a_idx, self.initial_state] = 1.
                         self.R[s, a_idx] = 10.
+                    elif self.grid[r][c] == 'x':
+                        self.P[s, a_idx, self.initial_state] = 1.
+                        self.R[s, a_idx] = -20
                     else:
                         ns_succ, ns_fail = np.inf, np.inf
                         if action == 0:
@@ -102,11 +105,8 @@ class GridWorldWithPits(FiniteEnv):
                         # self.P[s, a_idx] = self.P[s, a_idx] / np.sum(self.P[s, a_idx])
 
                         assert np.isclose(self.P[s, a_idx].sum(), 1)
-
-                        if self.grid[r][c] == 'x':
-                            self.R[s, a_idx] = -20
-                        else:
-                            self.R[s, a_idx] = -2
+                        
+                        self.R[s, a_idx] = -2
 
             if self.normalize_reward:
                 minr = np.min(self.R)

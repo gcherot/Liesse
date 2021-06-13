@@ -104,9 +104,9 @@ class GridWorldWithPits(FiniteEnv):
                         assert np.isclose(self.P[s, a_idx].sum(), 1)
 
                         if self.grid[r][c] == 'x':
-                            self.R[s, a_idx] = -20
+                            self.R[s, a_idx] = -100
                         else:
-                            self.R[s, a_idx] = -2
+                            self.R[s, a_idx] = -1
 
             if self.normalize_reward:
                 minr = np.min(self.R)
